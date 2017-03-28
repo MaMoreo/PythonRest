@@ -2,7 +2,7 @@
 # importante: en Windows hay que poner un espacio entre #! y la ruta
 from flask import Flask, jsonify, abort
 from flask import make_response, request
-from flask.ext.httpauth import HTTPBasicAuth
+from flask_httpauth import HTTPBasicAuth
 
 app = Flask(__name__)
 
@@ -34,7 +34,8 @@ def get_password(username):
 
 @auth.error_handler
 def unauthorized():
-    return make_response(jsonify({'error': 'Unauthorized access'}), 403)
+    return make_response(jsonify({'error': 'Unauthorized access'}), 403)  
+	# normaly we should return 401, but with 403 the browser does not open the password dialog
 
 
 @app.route('/')
